@@ -1,17 +1,14 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-
-        set<ListNode*> visited;
-        ListNode* temp = head;
-
-        while (temp != NULL) {
-            if (visited.find(temp) != visited.end()) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while (fast != NULL && fast->next != NULL) {
+            slow = slow->next;
+            fast = fast->next->next;
+            if (slow == fast) {
                 return true;
             }
-
-            visited.insert(temp);
-            temp = temp->next;
         }
         return false;
     }
